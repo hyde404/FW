@@ -43,18 +43,20 @@ class cpt:
                         j[0] += 1
                         break
                 else :
-                    i[1].append([1, s_addr])
+                   i[1].append([1, s_addr])
+
                 break
+            print("result for TCP : %s" % i)
         else :
             self.tcp.append([port, [[1, s_addr]]])
 
-    def add_icmp(self, s_addr):
-        for i in self.icmp:
-            if i[1] == s_addr:
-                i[0] += 1
-                break
-        else:
-            self.icmp.append([1, source_ip])
+    # def add_icmp(self, s_addr):
+    #     for i in self.icmp:
+    #         if i[1] == s_addr:
+    #             i[0] += 1
+    #             break
+    #     else:
+    #         self.icmp.append([1, source_ip])
 
     def print_tcp(self):
         print(self.tcp)
