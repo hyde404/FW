@@ -38,24 +38,29 @@ while True:
     except socket.error:
         break
 
-    eth = unpack.eth_header(packet[0:14])
-    print(eth)
-    iph = unpack.ip_header(packet[14:34])
+    eth_length=20
+    #eth = unpack.eth_header(packet[0:14])
+    #print(eth)
+    #iph = unpack.ip_header(packet[14:34])
+    iph = unpack.ip_header(packet[:eth_length])
     print(iph)
     #tph = unpack.tcp_header(packet[34:54])
     #print(tph)
 
     if iph.get("Protocol") == 6 :
-        tcph = unpack.tcp_header(packet[34:54])
-        compteur.add_tcp(tcph.get("Destination Port"), iph.get("Source Address"))
+        tcph = unpack.tcp_header(packet[eth_length:eth_length+20])
+        print(tcph)
+        # compteur.add_tcp(tcph.get("Destination Port"), iph.get("Source Address"))
         print("version 6")
     elif iph.get("Protocol") == 17 :
-        udph = unpack.udp_header(packet[34:42])
-        compteur.add_udp(udph.get("Destination Port"), iph.get("Source Address"))
+        udph = unpack.udp_header(packet[eth_length:eth_length+8])
+        print(udph)
+        # compteur.add_udp(udph.get("Destination Port"), iph.get("Source Address"))
         print("version 17")
     elif iph.get("Protocol") == 1 :
-        icmph = unpack.icmp_header(packet[34:42])
-        compteur.add_icmp(iph.get("Source Address"))
+        icmph = unpack.icmp_header(packet[eth_length:eth_length+4])
+        print(icmph)
+        # compteur.add_icmp(iph.get("Source Address"))
         print("version 1")
     else :
         print("ne matche rien")

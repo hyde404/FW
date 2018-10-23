@@ -6,19 +6,19 @@ class unpack:
     def __cinit__(self):
         self.data=None
 
-    # Ethernet Header Extraction
-    def eth_header(self, data):
-        storeobj=data
-        storeobj=struct.unpack("!6s6sH",storeobj)
-        destination_mac=binascii.hexlify(storeobj[0])
-        source_mac=binascii.hexlify(storeobj[1])
-        eth_protocol=storeobj[2]
-        data={
-            "Destination Mac": destination_mac,
-            "Source Mac": source_mac,
-            "Protocol": eth_protocol
-        }
-        return data
+    # # Ethernet Header Extraction
+    # def eth_header(self, data):
+    #     storeobj=data
+    #     storeobj=struct.unpack("!6s6sH",storeobj)
+    #     destination_mac=binascii.hexlify(storeobj[0])
+    #     source_mac=binascii.hexlify(storeobj[1])
+    #     eth_protocol=str(storeobj[2])
+    #     data={
+    #         "Destination Mac": destination_mac,
+    #         "Source Mac": source_mac,
+    #         "Protocol": eth_protocol
+    #     }
+    #     return data
 
     # ICMP Header Extraction
     def icmp_header(self, data):
@@ -61,7 +61,6 @@ class unpack:
         _header_checksum = storeobj[7]
         _source_address = socket.inet_ntoa(storeobj[8])
         _destination_address = socket.inet_ntoa(storeobj[9])
-
         data = {
             'Version': _version,
             "Tos": _tos,
