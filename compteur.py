@@ -44,9 +44,9 @@ class cpt:
                         break
                 else :
                    i[1].append([1, s_addr])
-
                 break
-            print("result for TCP : %s" % i)
+            #print("result for TCP : %s" % i)
+            return "hello"
         else :
             self.tcp.append([port, [[1, s_addr]]])
 
